@@ -1,5 +1,5 @@
 {
-  "name": "polka-war-token",
+  "name": "bet-game-contract",
   "version": "1.0.0",
   "main": "truffle-config.js",
   "directories": {
@@ -8,20 +8,20 @@
   "scripts": {
     "compile": "truffle compile",
     "deploy": "truffle migrate --network rinkeby_infura --reset",
-    "verify": "truffle run verify PolkaWarToken --network rinkeby_infura",
+    "verify": "truffle run verify BetGame --network rinkeby_infura",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sunny0714/PolkaWarToken.git"
+    "url": "git+https://github.com/sunny0714/bet-game-contract.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sunny0714/PolkaWarToken/issues"
+    "url": "https://github.com/sunny0714/bet-game-contract/issues"
   },
-  "homepage": "https://github.com/sunny0714/PolkaWarToken#readme",
+  "homepage": "https://github.com/sunny0714/bet-game-contract#readme",
   "description": "",
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.2",
