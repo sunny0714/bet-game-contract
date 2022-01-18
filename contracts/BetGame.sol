@@ -29,7 +29,7 @@ contract BetGame is Ownable {
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
 
-    // get the number of games
+    // get number of games
     function poolLength() external view returns (uint256) {
         return pools.length;
     }
@@ -92,5 +92,12 @@ contract BetGame is Ownable {
         // send award
         uint256 award = pools[poolIndex].tokenAmount.mul(2).mul(rewardMultiplier).div(100);
         betGameToken.transferFrom(address(this), msg.sender, award);
+    }
+
+    // withdraw funds
+    function withdrawFund() public onlyOwner {
+        uint256 balance = betGameToken.balanceOf(address(this));
+        require(balance > 0, "not enough fund");
+        betGameToken.transfer(msg.sender, balance);
     }
 }
