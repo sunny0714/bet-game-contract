@@ -24,7 +24,7 @@ contract BetGame is Ownable {
         address[] players;
     }
 
-    GamePool[] pools;
+    GamePool[] public pools;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
