@@ -19,7 +19,7 @@ contract BetGame is Ownable, ReentrancyGuard {
     struct GamePool {
         uint256 id;
         GameState state;
-        uint256 tokenAmount; // token amount needed to enter each pool. must e18, important when init
+        uint256 tokenAmount; // token amount needed to enter each pool
         address[] players;
     }
 
@@ -74,8 +74,8 @@ contract BetGame is Ownable, ReentrancyGuard {
             pools[poolIndex].state = GameState.Running;
         }
         // deposit token
-        betGameToken.transferFrom(msg.sender, address(this), pools[poolIndex].tokenAmount / 1e18);
-        emit Transfer(msg.sender, address(this), pools[poolIndex].tokenAmount / 1e18);
+        betGameToken.transferFrom(msg.sender, address(this), pools[poolIndex].tokenAmount);
+        emit Transfer(msg.sender, address(this), pools[poolIndex].tokenAmount);
     }
 
     // update game status
@@ -92,8 +92,8 @@ contract BetGame is Ownable, ReentrancyGuard {
         require(pools[poolIndex].state == GameState.Running, "no valid time");
         require(pools[poolIndex].players[0] == _winnerAddress || pools[poolIndex].players[1] == _winnerAddress, "player not found");
         // send award
-        uint256 award = pools[poolIndex].tokenAmount / 1e18 * 2 * rewardMultiplier / 100;
-        uint256 gasFee = pools[poolIndex].tokenAmount / 1e18 * 2 * (100 - rewardMultiplier) / 100;
+        uint256 award = pools[poolIndex].tokenAmount * 2 * rewardMultiplier / 100;
+        uint256 gasFee = pools[poolIndex].tokenAmount * 2 * (100 - rewardMultiplier) / 100;
         betGameToken.transferFrom(address(this), _winnerAddress, award);
         betGameToken.transferFrom(address(this), msg.sender, gasFee);
         emit LogClaimAward(_pid, _winnerAddress, award);
